@@ -19,7 +19,7 @@ body{margin:0;height:100%;display:flex;flex-direction:column;font-family:"Trebuc
 .big{font-size:24px;font-weight:800;margin:0}.muted{color:var(--muted);font-size:16px;margin:0;text-align:center}
 .row{display:flex;gap:10px;justify-content:center;align-items:flex-start}
 .btn{font:800 18px inherit;font-family:inherit;border:0;border-radius:20px;padding:14px 22px;background:var(--accent);color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.22)}
-.btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.22)}.btn.alt{background:#8a6bff}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.22)}.btn.alt{background:#8a6bff}.btn.sm{padding:8px 14px;font-size:14px;border-radius:14px}
 select{font:700 16px inherit;font-family:inherit;border-radius:14px;border:2px solid var(--muted);padding:10px;background:var(--card);color:var(--fg)}
 .key{position:relative;width:var(--s);height:var(--s);margin-bottom:calc(var(--s)*.06);transition:transform .05s}
 .key svg,.sl svg{width:100%;height:100%;display:block;pointer-events:none}
@@ -28,14 +28,14 @@ select{font:700 16px inherit;font-family:inherit;border-radius:14px;border:2px s
 .r1 svg{filter:drop-shadow(0 0 3px #7fd8ff)}.r2 svg{filter:drop-shadow(0 0 4px #c58bff)}
 .r3 svg{animation:rb 3s linear infinite}@keyframes rb{from{filter:drop-shadow(0 0 5px #f0f) hue-rotate(0)}to{filter:drop-shadow(0 0 5px #f0f) hue-rotate(360deg)}}
 .r4 svg{animation:gd 1.5s infinite}@keyframes gd{50%{filter:drop-shadow(0 0 9px #ffc933) brightness(1.15)}}
-.pack{position:relative;width:min(50vw,200px);aspect-ratio:3/4;border-radius:18px;background:linear-gradient(160deg,#ff8fb8,#ffb86b 50%,#7ee0c3);color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 18px var(--sh);animation:bob 2s ease-in-out infinite}
+.pack{position:relative;width:min(50vw,200px);aspect-ratio:3/4;border-radius:18px;background:linear-gradient(160deg,#ff8fb8,#ffb86b 50%,#7ee0c3);color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 18px var(--sh);animation:bob 2s ease-in-out infinite;cursor:pointer}
 .pack::before,.pack::after{content:"";position:absolute;left:0;right:0;height:14px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 6px,transparent 6px 12px)}
 .pack::before{top:0;border-radius:18px 18px 0 0}.pack::after{bottom:0;border-radius:0 0 18px 18px}
 .pack i{font-style:normal;font-weight:900;letter-spacing:2px;font-size:16px}.pack b{font-size:76px;line-height:1.1}.pack small{font-size:14px;font-weight:700}
 .pack s{position:absolute;top:-10px;right:-10px;background:var(--accent);color:#fff;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;text-decoration:none;font-weight:900;font-size:18px;text-shadow:none}
 .pack.shake{animation:shk .25s infinite}
 @keyframes bob{50%{transform:translateY(-8px) rotate(1.5deg)}}@keyframes shk{25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
-.cell{display:flex;flex-direction:column;align-items:center;gap:3px;width:min(29vw,118px);animation:pop .35s}
+.cell{display:flex;flex-direction:column;align-items:center;gap:3px;width:min(29vw,118px);animation:pop .35s;cursor:pointer}
 @keyframes pop{from{transform:scale(.4)}60%{transform:scale(1.15)}}
 .cell b{font-size:13px;line-height:1.1}.cell em{font-style:normal;font-weight:800;font-size:13px;color:var(--accent)}.cell small{font-size:12px;color:var(--muted);font-weight:700}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 10px}
@@ -51,9 +51,26 @@ select{font:700 16px inherit;font-family:inherit;border-radius:14px;border:2px s
 .sl.e{background:rgba(255,255,255,.16);border-radius:22%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35),inset 0 3px 8px rgba(0,40,80,.25);font-size:calc(var(--sz)*.4);color:#fff;opacity:.55}
 .sl u{position:absolute;bottom:-3%;right:-3%;text-decoration:none;font-weight:800;font-size:calc(var(--sz)*.26);background:var(--card);color:var(--fg);border-radius:10px;padding:0 4px;box-shadow:0 1px 3px var(--sh)}
 .sb{margin-top:calc(var(--sz)*.14);height:calc(var(--sz)*.7);border-radius:calc(var(--sz)*.25);background:rgba(255,255,255,.2);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);display:grid;place-items:center;color:#fff;font-weight:800;font-size:calc(var(--sz)*.28)}
+
+.col-wrap{display:flex;flex-direction:column;gap:10px;max-width:680px;margin:0 auto}
+.col-hd{background:var(--card);border-radius:16px;padding:12px 14px;box-shadow:0 2px 6px var(--sh);display:flex;flex-direction:column;gap:8px}
+.col-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-weight:800}
+.bar{height:10px;border-radius:99px;background:rgba(141,122,160,.22);overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .25s}
+.col-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:8px}
+.col-th{background:var(--card);border-radius:14px;padding:10px;box-shadow:0 2px 5px var(--sh);display:flex;flex-direction:column;gap:6px;text-align:left;border:2px solid transparent}
+.col-th.on{border-color:var(--accent)}
+.col-th-top{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px}
+.col-th small{color:var(--muted);font-weight:700;font-size:12px}
+.col-keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;background:var(--card);border-radius:16px;padding:10px;box-shadow:0 2px 6px var(--sh)}
+.mini-k{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;position:relative;background:rgba(141,122,160,.14);color:var(--muted);font-weight:800;font-size:12px}
+.mini-k.own{background:rgba(255,92,157,.12);cursor:pointer}
+.mini-k svg{width:88%;height:88%}
+.mini-k b{position:absolute;bottom:1px;right:3px;font-size:10px;color:var(--fg)}
+
 #nav{display:flex;gap:6px;padding:8px 10px}
-#nav button{flex:1;border:0;border-radius:16px;padding:8px 2px;background:transparent;color:var(--muted);font:800 14px inherit;font-family:inherit}
-#nav button span{display:block;font-size:26px}#nav button.on{background:var(--card);color:var(--fg);box-shadow:0 2px 6px var(--sh)}
+#nav button{flex:1;border:0;border-radius:16px;padding:8px 2px;background:transparent;color:var(--muted);font:800 13px inherit;font-family:inherit}
+#nav button span{display:block;font-size:24px}#nav button.on{background:var(--card);color:var(--fg);box-shadow:0 2px 6px var(--sh)}
 #toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:18px;font-weight:700;opacity:0;transition:.3s;pointer-events:none;max-width:88vw;text-align:center;z-index:9}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 .fl{position:fixed;font-weight:900;font-size:20px;color:var(--accent);pointer-events:none;animation:up .9s forwards;transform:translateX(-50%);text-shadow:0 1px 3px var(--sh);white-space:nowrap;z-index:9}
@@ -93,7 +110,7 @@ const $=id=>document.getElementById(id);
 const today=()=>{try{return new Date().toLocaleDateString('sv')}catch(e){return''}};
 function load(){const d={coins:20,packs:5,clicks:0,owned:{},th:0,pg:0,daily:today(),mute:0};try{return Object.assign(d,JSON.parse(localStorage.getItem(SK)||'{}'))}catch(e){return d}}
 function save(){try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){}}
-let S=load(),tab='ub',ub=null,AC=null,MB=null,NB=null;
+let S=load(),tab='ub',colFilter='all',ub=null,AC=null,MB=null,NB=null;
 function ac(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
 function nz(f,v,d){const a=AC;if(!a||S.mute)return;const n=a.sampleRate*d|0,b=a.createBuffer(1,n,a.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=(Math.random()*2-1)*(1-i/n);const s=a.createBufferSource(),fl=a.createBiquadFilter(),g=a.createGain();s.buffer=b;fl.type='bandpass';fl.frequency.value=f;fl.Q.value=1.2;g.gain.value=v;s.connect(fl);fl.connect(g);g.connect(a.destination);s.start()}
 function tn(f,t,d,v,ty){const a=AC;if(!a||S.mute)return;const o=a.createOscillator(),g=a.createGain();o.type=ty||'triangle';o.frequency.value=f;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.02)}
@@ -112,16 +129,16 @@ function fl(el,t){const r=el.getBoundingClientRect(),s=document.createElement('s
 const kh=(i,s)=>`<div class="key r${RAR(i)}" style="--s:${s}">${svg(i)}</div>`;
 const qk=s=>`<div class="key q" style="--s:${s}">?</div>`;
 function hud(){$('hud').innerHTML=`<div class="pill">🪙 <b id="coins">${S.coins}</b></div><div class="pill">🎁 <b>${S.packs}</b></div><button class="pill" onclick="snd()">${S.mute?'🔇':'🔊'}</button>`}
-function nav(){$('nav').innerHTML=[['ub','🎁','Unboxen'],['co','⌨️','Toetsenbord']].map(t=>`<button class="${tab==t[0]?'on':''}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join('')}
+function nav(){$('nav').innerHTML=[['ub','🎁','Unboxen'],['co','⌨️','Toetsenbord'],['col','📖','Verzameling']].map(t=>`<button class="${tab==t[0]?'on':''}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join('')}
 function go(t){tab=t;ub=null;render()}
-function render(){hud();nav();$('main').innerHTML=tab=='ub'?vUb():vCo();if(tab=='co')bindCo()}
+function render(){hud();nav();$('main').innerHTML=tab=='ub'?vUb():tab=='col'?vCol():vCo();if(tab=='co')bindCo()}
 const PK=(c,b)=>`<div class="pack ${c}" ${c?'':'onclick="openPack(-1)"'}><i>CLICKEEZ</i><b>?</b><small>3 verrassingen</small>${b&&S.packs>0?`<s>${S.packs}</s>`:''}</div>`;
 function vUb(){
  if(!ub)return`<div class="c">${PK('',1)}<p class="big">${S.packs>0?'Tik om te openen!':'Tik · 50 🪙'}</p><div class="row" style="align-items:center"><select id="ts">${TH.map((t,k)=>`<option value="${k}" ${k==S.th?'selected':''}>${t[0]} ${t[1]}</option>`).join('')}</select><button class="btn alt" onclick="openPack(+$('ts').value)">Thema · 80 🪙</button></div><p class="muted">Muntjes verdien je door op het toetsenbord te klikken.</p></div>`;
  if(ub.phase=='shake')return`<div class="c">${PK('shake',0)}</div>`;
  const all=ub.items.every(x=>x.shown);
  return`<div class="c"><div class="row">${ub.items.map((x,j)=>x.shown?`<div class="cell">${kh(x.i,'min(27vw,110px)')}<b>${NM(x.i)}</b><em>${RN[RAR(x.i)]}</em><small>${x.n?'NIEUW!':'Dubbel +'+DUP[RAR(x.i)]+' 🪙'}</small></div>`:`<div class="cell" onclick="rev(${j})">${qk('min(27vw,110px)')}</div>`).join('')}</div>${all?`${S.packs>0||S.coins>=50?'<button class="btn" onclick="again()">🎁 Nog een pakje!</button>':''}<button class="btn alt" onclick="go(\'co\')">⌨️ Naar het toetsenbord</button>`:'<p class="big">Tik op de toetsen!</p>'}</div>`}
-function draw(t){if(Math.random()<.001)return SOPH;const ti=t<0?Math.random()*24|0:t,x=Math.random(),r=x<.015?3:x<.075?2:x<.295?1:0,l=LST[ti][r];return l[Math.random()*l.length|0]}
+function draw(t){if(Math.random()<.001)return SOPH;const ti=t<0?Math.random()*TH.length|0:t,x=Math.random(),r=x<.015?3:x<.075?2:x<.295?1:0,l=LST[ti][r];return l[Math.random()*l.length|0]}
 function openPack(t){
  if(ub)return;
  if(t<0&&S.packs>0)S.packs--;else{const c=t<0?50:80;if(S.coins<c){toast('Nog te weinig muntjes. Ga klikken op het toetsenbord!');return}S.coins-=c}
@@ -132,6 +149,36 @@ function openPack(t){
 function rev(j){const x=ub.items[j],r=RAR(x.i);if(x.shown)return;x.shown=true;cDown();fan(r);burst(r==4?['👑','💖','🌟','✨','🎉']:r>=2?['👑','✨','🌟','💛']:r?['✨','⭐']:['🎈','✨'],r==4?40:r>=2?24:r?14:8);if(r==4)toast('👑 SOPHIE CLICKEEZ!!! 🎉');if(x.i!==SOPH){S.th=x.i/NPT|0;S.pg=(x.i%NPT)/25|0}save();render()}
 function again(){const t=ub.t;ub=null;openPack(t)}
 function setTh(k){S.th=k;S.pg=0;save();render()}function setPg(d){S.pg=((S.pg|0)+d+5)%5;save();render()}
+function pickInBoard(i){if(i===SOPH){tab='co';render();toast('👑 Sophie Clickeez staat boven het toetsenbord!');return}S.th=i/NPT|0;S.pg=(i%NPT)/25|0;tab='co';save();render()}
+function vCol(){
+ const cnt=TH.map(()=>0);let n=0;
+ for(const k in S.owned){n++;if(+k<SOPH)cnt[k/NPT|0]++}
+ const sp=!!S.owned[SOPH],ti=S.th|0,t=TH[ti],pct=((n/N)*100).toFixed(1);
+ const start=ti*NPT,end=start+NPT;
+ const list=[];
+ for(let i=start;i<end;i++){
+  const own=!!S.owned[i];
+  if(colFilter==='own'&&!own)continue;
+  if(colFilter==='miss'&&own)continue;
+  list.push(i);
+ }
+ return`<div class="col-wrap">
+  <div class="col-hd">
+   <div class="col-top"><span>📖 Verzameling: ${n} / ${N} (${pct}%)</span><span>👑 Sophie: ${sp?'Gevonden!':'Nog niet'}</span></div>
+   <div class="bar"><i style="width:${pct}%"></i></div>
+   <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap">
+    <div class="row" style="gap:6px">
+     <button class="btn sm ${colFilter==='all'?'':'alt'}" onclick="colFilter='all';render()">Alles (${NPT})</button>
+     <button class="btn sm ${colFilter==='own'?'':'alt'}" onclick="colFilter='own';render()">Bezit (${cnt[ti]})</button>
+     <button class="btn sm ${colFilter==='miss'?'':'alt'}" onclick="colFilter='miss';render()">Mist (${NPT-cnt[ti]})</button>
+    </div>
+    <button class="btn sm alt" onclick="pickInBoard(${start})">⌨️ Open thema</button>
+   </div>
+  </div>
+  <div class="col-grid">${TH.map((x,k)=>`<button class="col-th ${k==ti?'on':''}" onclick="setTh(${k})"><div class="col-th-top"><span>${x[0]} ${x[1]}</span><small>${cnt[k]}/${NPT}</small></div><div class="bar"><i style="width:${(cnt[k]/NPT)*100}%"></i></div></button>`).join('')}</div>
+  <div class="col-hd"><div class="col-top"><span>${t[0]} ${t[1]} (${cnt[ti]}/${NPT})</span><small>Tik op een Clickee om het toetsenbord te openen</small></div></div>
+  <div class="col-keys">${list.length?list.map(i=>{const c=S.owned[i]||0;return c?`<div class="mini-k own r${RAR(i)}" onclick="pickInBoard(${i})" title="${NM(i)}">${svg(i)}${c>1?`<b>×${c}</b>`:''}</div>`:`<div class="mini-k" title="Nog niet gevonden">#${(i%NPT)+1}</div>`}).join(''):'<div style="grid-column:1/-1;padding:16px;text-align:center" class="muted">Geen Clickeez in dit filter.</div>'}</div>
+ </div>`}
 function vCo(){
  const ti=S.th,t=TH[ti],cnt=TH.map(()=>0);let n=0,sp=S.owned[SOPH];
  for(const k in S.owned){n++;if(+k<SOPH)cnt[k/NPT|0]++}
