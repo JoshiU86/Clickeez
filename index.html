@@ -96,16 +96,20 @@ select{font:700 16px inherit;font-family:inherit;border-radius:14px;border:2px s
 <body>
 <div id="hud"></div><div id="main"></div><div id="nav"></div><div id="toast" role="status" aria-live="polite"></div><div id="md"></div>
 <script>
-const SK='clickeez-v3',DK='#3b2250',NPT=25,SOPH=600,N=601;
-const ADJ='Lieve,Blije,Slimme,Stoute,Zoete,Dappere,Slaperige,Gekke,Zachte,Snelle,Stille,Grappige,Knuffelige,Kleine,Grote,Glimmende,Vrolijke,Rustige,Gele,Gouden,Verlegen,Sterke,Stoere,Dromerige,Pluizige'.split(',');
+const SK='clickeez-v3',DK='#3b2250',NPT=125,SOPH=3000,N=3001,V=2;
+const ADJ=('Lieve,Blije,Slimme,Stoute,Zoete,Dappere,Slaperige,Gekke,Zachte,Snelle,Stille,Grappige,Knuffelige,Kleine,Grote,Glimmende,Vrolijke,Rustige,Gele,Gouden,Verlegen,Sterke,Stoere,Dromerige,Pluizige,'+
+'Blauwe,Rode,Groene,Roze,Paarse,Oranje,Witte,Zilveren,Bronzen,Glanzende,Sprankelende,Flonkerende,Schitterende,Twinkelende,Stralende,Wollige,Zijdeachtige,Fluweelachtige,Satijnen,Kartonnen,Houten,Stenen,Glazen,Metalen,Papieren,'+
+'Zonnige,Zomerse,Winterse,Herfstige,Wolkige,Mistige,Windige,Stormachtige,Donderende,Regenboogige,Kleurige,Gestippelde,Gestreepte,Geruite,Geblokte,Suikerzoete,Honingzoete,Chocoladeachtige,Aardbeienachtige,Vanilleachtige,Krokante,Sappige,Donsachtige,Bubbelende,Bruisende,'+
+'Piepende,Zoemende,Rinkelende,Tinkelende,Trommelende,Zingende,Dansende,Hippende,Springende,Huppelende,Zwevende,Vliegende,Zwemmende,Kruipende,Wandelende,Rennende,Rollende,Draaiende,Tollende,Duikelende,Wiebelende,Schuddende,Trillende,Bibberende,Gapende,'+
+'Nieuwsgierige,Verbaasde,Verwonderde,Ondeugende,Plagerige,Gehoorzame,Eigenwijze,Koppige,Handige,Knappe,Prachtige,IJverige,Vlotte,Vinnige,Flinke,Pittige,Zalige,Heerlijke,Lieflijke,Snoezige,Vertederende,Aandoenlijke,Vriendelijke,Hartelijke,Warme').split(',');
 const TH=[['🍓','Aardbeien',345,'Aardbei,Framboos,Kers,Taartje,Jam'],['🌷','Tuin',120,'Tulp,Slak,Bij,Madelief,Vlinder'],['🌙','Sterrenhemel',255,'Maan,Ster,Komeet,Wolkje,Planeet'],['🫧','Zeepbellen',195,'Bel,Schuim,Badeend,Spons,Druppel'],['🍬','Snoepwinkel',320,'Drop,Lolly,Toffee,Gummie,Koekje'],['🍦','IJsjes',30,'Hoorntje,Ijsbol,Wafel,Raket,Sorbet'],['🦖','Dino’s',100,'Dino,Ei,Botje,Vulkaan,Varen'],['🦄','Eenhoorns',290,'Eenhoorn,Hoorn,Manen,Glitter,Pony'],['🌲','Bos',140,'Eekhoorn,Uil,Paddenstoel,Vos,Dennenappel'],['🐠','Oceaan',200,'Visje,Krab,Octopus,Schelp,Zeester'],['🚀','Ruimte',235,'Raket,Alien,Astronaut,Robot,Maanrots'],['🧁','Bakkerij',20,'Cupcake,Donut,Broodje,Taart,Pannenkoek'],['🐮','Boerderij',80,'Koe,Kip,Varken,Paard,Lammetje'],['🎉','Feestje',340,'Ballon,Slinger,Hoedje,Cadeau,Confetti'],['❄️','Winter',205,'Sneeuwman,Ijsbeer,Muts,Pinguïn,Kristal'],['☀️','Zomer',48,'Zon,Strand,Zonnebril,Watermeloen,Parasol'],['🌈','Regenboog',170,'Kleurtje,Regenboog,Boog,Stipje,Wolk'],['✨','Magie',275,'Toverstaf,Spreuk,Tovenaar,Toverdrank,Glinster'],['🍕','Pizza',12,'Pizza,Pasta,Kaas,Tomaat,Frietje'],['🎵','Muziek',260,'Noot,Gitaar,Trommel,Fluit,Microfoon'],['🏰','Sprookjes',310,'Prinses,Kasteel,Draak,Kikker,Kroon'],['🦁','Dierentuin',38,'Leeuw,Aap,Giraf,Olifant,Panda'],['🎃','Halloween',25,'Pompoen,Spookje,Vleermuis,Spin,Kat'],['🎄','Kerst',130,'Boom,Rendier,Kerstbal,Engel,Sneeuwvlok']].map(t=>{t[3]=t[3].split(',');return t});
-const RN=['Normaal','Rare','Super','Mega','Sophie'],CPC=[1,2,4,10,50],DUP=[2,5,15,40,500];
+const RN=['Normaal','Rare','Super','Mega','Sophie'],CPC=[1,2,4,10,50],DUP=[2,5,15,40,500],WSTEP=NPT/5;
 const MQ=[['click','Klik 40 keer op de toetsen',40,{c:15}],['click','Klik 100 keer op de toetsen',100,{c:35}],['open','Open 2 pakjes',2,{p:1}],['new','Vind 3 nieuwe Clickeez',3,{c:25}],['rare','Vind een Rare of beter',1,{c:30}]];
 const MS=[[10,{p:1}],[25,{p:2}],[50,{p:3,c:50}],[100,{p:5,c:100}],[200,{p:8,c:200}],[300,{p:10,c:300}],[400,{p:15,c:400}],[500,{p:20,c:500}],[600,{g:1,c:1000}]];
 function rng(s){let a=(s*2654435761+12345)>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-const RA=new Uint8Array(600),LST=[];
-TH.forEach((t,ti)=>{const g=rng(1000+ti),a=[];for(let i=0;i<15;i++)a.push(0);for(let i=0;i<6;i++)a.push(1);for(let i=0;i<3;i++)a.push(2);for(let i=0;i<1;i++)a.push(3);for(let i=a.length-1;i>0;i--){const j=g()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}LST[ti]=[[],[],[],[]];a.forEach((r,v)=>{RA[ti*NPT+v]=r;LST[ti][r].push(ti*NPT+v)})});
-const RAR=i=>i===SOPH?4:RA[i],NM=i=>i===SOPH?'Sophie Clickeez':ADJ[i%NPT]+' '+TH[i/NPT|0][3][(i%NPT)/5|0];
+const RA=new Uint8Array(NPT*TH.length),LST=[];
+TH.forEach((t,ti)=>{const g=rng(1000+ti),a=[];for(let i=0;i<75;i++)a.push(0);for(let i=0;i<30;i++)a.push(1);for(let i=0;i<15;i++)a.push(2);for(let i=0;i<5;i++)a.push(3);for(let i=a.length-1;i>0;i--){const j=g()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}LST[ti]=[[],[],[],[]];a.forEach((r,v)=>{RA[ti*NPT+v]=r;LST[ti][r].push(ti*NPT+v)})});
+const RAR=i=>i===SOPH?4:RA[i],NM=i=>i===SOPH?'Sophie Clickeez':ADJ[i%NPT]+' '+TH[i/NPT|0][3][(i%NPT)/WSTEP|0];
 const SC=new Map();
 function svg(id){
  if(SC.has(id))return SC.get(id);
@@ -125,7 +129,14 @@ function svg(id){
 const $=id=>document.getElementById(id);
 const today=()=>{try{return new Date().toLocaleDateString('sv')}catch(e){return''}};
 const okId=id=>(id>=0&&id<NPT*TH.length)||id===SOPH;
-function load(){const d={coins:20,packs:5,clicks:0,owned:{},th:0,daily:'',mute:0,done:{},gold:0,sw:0,st:0,q:null,ms:{},nt:{},tut:0};try{const o=Object.assign(d,JSON.parse(localStorage.getItem(SK)||'{}'));['coins','packs','clicks','gold','sw','st','mute','tut'].forEach(k=>{o[k]=o[k]|0});if(!(o.th>=0&&o.th<TH.length))o.th=0;if(typeof o.daily!=='string')o.daily='';if(!o.done||typeof o.done!=='object')o.done={};if(!o.ms||typeof o.ms!=='object')o.ms={};if(!o.nt||typeof o.nt!=='object')o.nt={};if(!o.q||typeof o.q!=='object'||!Array.isArray(o.q.ids)||!o.q.p)o.q=null;const clean={};for(const k in o.owned){const id=+k,cnt=o.owned[k]|0;if(cnt>0&&okId(id))clean[id]=cnt}o.owned=clean;if(!o.tut&&Object.keys(o.owned).length)o.tut=1;return o}catch(e){return d}}
+const remapId=id=>id===600?SOPH:(id/25|0)*NPT+(id%25);
+function load(){const d={coins:20,packs:5,clicks:0,owned:{},th:0,daily:'',mute:0,done:{},gold:0,sw:0,st:0,q:null,ms:{},nt:{},tut:0,v:V};try{const o=Object.assign(d,JSON.parse(localStorage.getItem(SK)||'{}'));['coins','packs','clicks','gold','sw','st','mute','tut','th'].forEach(k=>{o[k]=o[k]|0});if(typeof o.daily!=='string')o.daily='';if(!o.done||typeof o.done!=='object')o.done={};if(!o.ms||typeof o.ms!=='object')o.ms={};if(!o.nt||typeof o.nt!=='object')o.nt={};if(!o.q||typeof o.q!=='object'||!Array.isArray(o.q.ids)||!o.q.p)o.q=null;
+ const ids=Object.keys(o.owned).map(Number).filter(x=>x>=0);
+ if(o.v!==V&&ids.length&&Math.max(...ids)<=600){const m={};for(const k in o.owned){const id=+k,c=o.owned[k]|0,nid=remapId(id);if(c>0&&okId(nid))m[nid]=(m[nid]||0)+c}o.owned=m}
+ o.v=V;
+ const clean={};for(const k in o.owned){const id=+k,cnt=o.owned[k]|0;if(cnt>0&&okId(id))clean[id]=cnt}o.owned=clean;
+ if(!(o.th>=0&&o.th<TH.length))o.th=0;
+ if(!o.tut&&Object.keys(o.owned).length)o.tut=1;return o}catch(e){return d}}
 function save(){try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){}}
 let S=load(),tab='ub',colFilter='all',ub=null,AC=null,MB=null,NB=null;
 try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
@@ -189,10 +200,10 @@ function revAll(){if(!ub)return;let t=0;const fr=[];ub.items.forEach(x=>{if(!x.s
 function again(){if(!ub)return;const t=(ub.t===-2&&S.gold>0)?-2:ub.t;ub=null;if(t===-2&&S.gold<1){render();return}if(t===-1&&S.packs<1&&S.coins<50){render();toast('Nog te weinig muntjes.');return}openPack(t)}
 function setTh(k){S.th=k;colFilter='all';save();render()}
 function pickInBoard(i){if(i===SOPH){tab='co';render();toast('👑 Sophie Clickeez staat boven het toetsenbord!');return}S.th=i/NPT|0;colFilter='all';tab='co';save();render()}
-function enc(){const o=Object.keys(S.owned).map(k=>S.owned[k]>1?k+'x'+S.owned[k]:k).join(',');return'CLK3:'+btoa(JSON.stringify({c:S.coins,p:S.packs,k:S.clicks,t:S.th,d:Object.keys(S.done).join(','),g:S.gold,s:S.st,m:Object.keys(S.ms).join(','),n:Object.keys(S.nt).join(','),o}))}
+function enc(){const o=Object.keys(S.owned).map(k=>S.owned[k]>1?k+'x'+S.owned[k]:k).join(',');return'CLK3:'+btoa(JSON.stringify({v:V,c:S.coins,p:S.packs,k:S.clicks,t:S.th,d:Object.keys(S.done).join(','),g:S.gold,s:S.st,m:Object.keys(S.ms).join(','),n:Object.keys(S.nt).join(','),o}))}
 function mkBk(){const t=$('bko');t.value=enc();t.focus();t.select()}
 function cpBk(){const t=$('bko');if(!t.value)mkBk();const ok=()=>toast('Code gekopieerd!'),old=()=>{t.select();try{document.execCommand('copy');ok()}catch(e){toast('Kopieer de code zelf uit het vak')}};try{navigator.clipboard.writeText(t.value).then(ok,old)}catch(e){old()}}
-function rsBk(){try{const v=$('bki').value.replace(/\s/g,'');if(v.indexOf('CLK3:')!==0)throw 0;const j=JSON.parse(atob(v.slice(5)));let a=0;String(j.o||'').split(',').forEach(s=>{if(!s)return;const q=s.split('x'),id=+q[0],c=q[1]?q[1]|0:1;if(c>0&&okId(id)){S.owned[id]=Math.max(S.owned[id]||0,c);a++}});S.coins=Math.max(S.coins,j.c|0);S.packs=Math.max(S.packs,j.p|0);S.clicks=Math.max(S.clicks,j.k|0);String(j.d||'').split(',').forEach(x=>{if(x!=='')S.done[+x]=1});S.gold=Math.max(S.gold|0,j.g|0);S.st=Math.max(S.st|0,j.s|0);S.th=Math.min(Math.max(j.t|0,0),TH.length-1);String(j.m||'').split(',').forEach(x=>{if(x!=='')S.ms[+x]=1});String(j.n||'').split(',').forEach(x=>{if(x!=='')S.nt[x]=1});save();render();toast('✅ Hersteld: '+a+' Clickeez samengevoegd')}catch(e){toast('Die code werkt niet. Plak hem helemaal, beginnend met CLK3:')}}
+function rsBk(){try{const v=$('bki').value.replace(/\s/g,'');if(v.indexOf('CLK3:')!==0)throw 0;const j=JSON.parse(atob(v.slice(5))),rm=j.v!==V;let a=0;String(j.o||'').split(',').forEach(s=>{if(!s)return;const q=s.split('x'),raw=+q[0],c=q[1]?q[1]|0:1,id=rm?remapId(raw):raw;if(c>0&&okId(id)){S.owned[id]=Math.max(S.owned[id]||0,c);a++}});S.coins=Math.max(S.coins,j.c|0);S.packs=Math.max(S.packs,j.p|0);S.clicks=Math.max(S.clicks,j.k|0);String(j.d||'').split(',').forEach(x=>{if(x!=='')S.done[+x]=1});S.gold=Math.max(S.gold|0,j.g|0);S.st=Math.max(S.st|0,j.s|0);S.th=Math.min(Math.max(j.t|0,0),TH.length-1);String(j.m||'').split(',').forEach(x=>{if(x!=='')S.ms[+x]=1});String(j.n||'').split(',').forEach(x=>{if(x!=='')S.nt[x]=1});save();render();toast('✅ Hersteld: '+a+' Clickeez samengevoegd')}catch(e){toast('Die code werkt niet. Plak hem helemaal, beginnend met CLK3:')}}
 let DS=null,cb=0,cbT=0;
 const uniq=()=>Object.keys(S.owned).length,rw=r=>(r.c?'+'+r.c+' 🪙 ':'')+(r.p?'+'+r.p+' 🎁 ':'')+(r.g?'+1 🌟':'');
 function Q(){if(!S.q||S.q.d!==today()||!Array.isArray(S.q.ids)||S.q.ids.length!==3||!S.q.ids.every(i=>i>=0&&i<MQ.length)||!S.q.p){const g=rng([...today()].reduce((a,c)=>a*31+c.charCodeAt(0)|0,7)),a=[0,1,2,3,4];for(let i=4;i>0;i--){const j=g()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}S.q={d:today(),ids:a.slice(0,3),p:{click:0,open:0,new:0,rare:0},c:[0,0,0]}}return S.q}
